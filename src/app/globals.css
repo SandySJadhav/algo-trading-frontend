@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background: #fefefe;
+}
+
+*:focus {
+  outline: transparent;
+}
+
+.card {
+  border-radius: 6px;
+  background-color: white;
+  box-shadow: 0 1px 20px 0 rgba(17, 30, 79, .1);
+}
+
+.hide-scroll {
+  overflow: hidden !important;
+}
+
+.header {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  transition: background-color .3s ease-in-out;
+}
+
+.header.header-fixed {
+  background-color: hsla(0, 0%, 100%, .975);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .05);
+  transition: background-color .3s ease-in-out;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.custom-shadow {
+  box-shadow: 0 10px 50px 0 rgba(0, 0, 0, .2);
+}
+
+.dropdown-menu-corner {
+  position: absolute;
+  top: -7px;
+  left: 12px;
+  width: 10px;
+  height: 10px;
+  transform: rotate(-45deg);
+  background-color: #fff;
+  box-shadow: 0 10px 50px 0 rgba(0, 0, 0, .2);
+}
