@@ -56,7 +56,7 @@ const Modal = ({ title, open, children, onClose }: Props) => {
                             data-testid='modal-backdrop'
                         />
                         <motion.div
-                            className="modal-open bg-white md:mx-auto p-4 fixed inset-x-0 z-11 m-1 rounded-md md:relative"
+                            className="modal-open bg-white md:mx-auto md:h-auto h-[-webkit-fill-available] p-4 fixed inset-x-0 z-11 m-1 rounded-md md:relative"
                             id="close"
                             tabIndex={1}
                             aria-hidden='true'
@@ -76,7 +76,7 @@ const Modal = ({ title, open, children, onClose }: Props) => {
                                 }
                             }}
                         >
-                            <div className='p-4 bg-white'>
+                            <div className='p-4 bg-white md:h-auto h-[-webkit-fill-available]'>
                                 <div className='flex justify-between items-center text-black'>
                                     {
                                         title ? <h2
@@ -99,7 +99,7 @@ const Modal = ({ title, open, children, onClose }: Props) => {
 
                                 <div
                                     className={cx(
-                                        'py-2 space-y-6 max-h-[100vh] w-full sm:h-auto overflow-y-auto overflow-x-hidden',
+                                        'py-2 max-h-[100vh] md:h-auto h-[-webkit-fill-available] w-full overflow-y-auto overflow-x-hidden',
                                     )}
                                 >
                                     {children}

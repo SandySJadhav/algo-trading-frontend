@@ -24,7 +24,8 @@ export const UserMenus = [
 
 export const NavigationMenus = [
     {
-        label: "Dashboard"
+        label: "Dashboard",
+        url: "/"
     },
     {
         label: "Strategies",

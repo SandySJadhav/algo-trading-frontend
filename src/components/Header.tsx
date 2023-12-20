@@ -1,14 +1,16 @@
 "use client"
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
 import { HiBars3, HiChevronDown } from "react-icons/hi2";
 import classNames from "classnames";
 import Modal from "./Modal";
 import Image from "next/image";
 import Dropdown from "./Dropdown";
 import { DropdownOption } from "../types";
-import { NavigationMenus, UserMenus } from "@constants/Menu";
+import { NavigationMenus } from "@constants/Menu";
+import { useRouter } from "next/navigation";
 
-const NavigationWithDropdown = ({ label, subMenus = [] }: DropdownOption) => {
+const NavigationWithDropdown = ({ label, subMenus = [], url }: DropdownOption) => {
+    const router = useRouter();
     const [panelOpen, setPanelOpen] = useState(false);
     const dropdownRef = useRef<HTMLUListElement>();
 
@@ -21,9 +23,14 @@ const NavigationWithDropdown = ({ label, subMenus = [] }: DropdownOption) => {
                 }, 10);
             }
             setPanelOpen(!panelOpen);
-        } else {
-            // redirect to this link
-
+        } else if (url) {
+            if (url.indexOf("http") === -1) {
+                // redirect to this link
+                router.push(url);
+            } else {
+                // external site url
+                window.open(url, "_blank");
+            }
         }
     }
 
@@ -35,8 +42,10 @@ const NavigationWithDropdown = ({ label, subMenus = [] }: DropdownOption) => {
 
     return <div
         key={label}
-        className="select-none p-4 hover:text-master-blue cursor-pointer"
+        tabIndex={0}
+        className="select-none p-4 hover:text-master-blue active:text-master-blue focus:text-master-blue cursor-pointer"
         onClick={handleNavItemClick}
+        onKeyDown={e => e.key === 'Enter' && handleNavItemClick()}
     >
         <div className="flex items-center justify-between h-full">
             <span>{label}</span>
@@ -100,7 +109,7 @@ const Header = () => {
                 </div>
             </div>
             <Modal open={menuOpen} onClose={() => setMenuOpen(false)}>
-                {UserMenus.map(menu => <NavigationWithDropdown key={menu.label} {...menu} />)}
+                {NavigationMenus.map(menu => <NavigationWithDropdown key={menu.label} {...menu} />)}
             </Modal>
         </header>
     );
