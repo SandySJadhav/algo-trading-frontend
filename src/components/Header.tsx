@@ -9,7 +9,7 @@ import { DropdownOption } from "../types";
 import { NavigationMenus } from "@constants/Menu";
 import { useRouter } from "next/navigation";
 
-const NavigationWithDropdown = ({ label, subMenus = [], url }: DropdownOption) => {
+const NavigationWithDropdown = ({ label, subMenus = [], url, icon }: DropdownOption) => {
     const router = useRouter();
     const [panelOpen, setPanelOpen] = useState(false);
     const dropdownRef = useRef<HTMLUListElement>();
@@ -47,7 +47,8 @@ const NavigationWithDropdown = ({ label, subMenus = [], url }: DropdownOption) =
         onClick={handleNavItemClick}
         onKeyDown={e => e.key === 'Enter' && handleNavItemClick()}
     >
-        <div className="flex items-center justify-between h-full">
+        <div className="flex items-center justify-start h-full">
+            {icon}
             <span>{label}</span>
             {subMenus?.length > 0 && <HiChevronDown className="inline ml-2" />}
         </div>
@@ -87,7 +88,7 @@ const Header = () => {
         <header className={classNames("header", {
             'header-fixed': floatHeader
         })}>
-            <div className="container">
+            <div className="px-20 lg:px-30 xl:px-40">
                 <div className="h-[100px]">
                     <div className="flex items-center justify-between h-full">
                         <div className="flex items-center">

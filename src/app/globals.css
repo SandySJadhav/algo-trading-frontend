@@ -37,14 +37,6 @@ body {
   transition: background-color .3s ease-in-out;
 }
 
-.container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .custom-shadow {
   box-shadow: 0 10px 50px 0 rgba(0, 0, 0, .2);
 }

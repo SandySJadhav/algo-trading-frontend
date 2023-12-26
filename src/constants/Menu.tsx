@@ -1,26 +1,12 @@
-export const UserMenus = [
-    {
-        label: "Profile"
-    },
-    {
-        label: "Subscriptions"
-    },
-    {
-        label: "Notifications"
-    },
-    {
-        label: "Invoices"
-    },
-    {
-        label: "Change Password"
-    },
-    {
-        label: "Help & Support"
-    },
-    {
-        label: "Updates"
-    }
-]
+import {
+    HiBell,
+    HiDocumentCheck,
+    HiEnvelope,
+    HiKey,
+    HiMiniWrenchScrewdriver,
+    HiUser,
+    HiUserCircle
+} from "react-icons/hi2";
 
 export const NavigationMenus = [
     {
@@ -49,5 +35,38 @@ export const NavigationMenus = [
     },
     {
         label: "Reports"
+    },
+    {
+        label: "User",
+        icon: <HiUserCircle className="h-10 w-10"/>,
+        subMenus: [
+            {
+                label: "Profile",
+                icon: <HiUser />
+            },
+            {
+                label: "Subscriptions",
+                icon: <HiEnvelope />
+            },
+            {
+                label: "Notifications",
+                icon: <HiBell />
+            },
+            {
+                label: "Invoices",
+                icon: <HiDocumentCheck />
+            },
+            {
+                label: "Change Password",
+                icon: <HiKey />
+            },
+            {
+                label: "Help & Support",
+                icon: <HiMiniWrenchScrewdriver />
+            },
+            {
+                label: "Updates"
+            }
+        ]
     }
 ]

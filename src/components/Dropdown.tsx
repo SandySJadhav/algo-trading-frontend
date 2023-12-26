@@ -47,15 +47,15 @@ const Dropdown = forwardRef(({ open, options, ...rest }: Props, ref?: ForwardedR
                     <motion.div className='dropdown-menu-corner' />
                     {options?.map(option => {
                         return <motion.li
-                            className='px-5 my-1 text-[#212529] flex-nowrap border-none font-normal clear-both w-full min-h-[20px] hover:text-master-blue focus:text-master-blue active:text-master-blue items-center '
+                            className='px-5 my-2 text-[#212529] flex flex-nowrap border-none font-normal clear-both w-full min-h-[20px] hover:text-master-blue focus:text-master-blue active:text-master-blue items-center'
                             tabIndex={0}
                             id={option.label}
                             key={option.label}
                         >
                             {
-                                option.icon && <div>{option.icon}</div>
+                                option.icon && <div className='w-7'>{option.icon}</div>
                             }
-                            <div>{option.label}</div>
+                            <div className='whitespace-nowrap'>{option.label}</div>
                         </motion.li>
                     })}
                 </motion.ul>
