@@ -1,11 +1,9 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
 import { ReactNode } from 'react'
+import type { Metadata } from 'next'
+import { Poppins } from 'next/font/google'
 import classNames from 'classnames'
-import Header from '@components/Header'
-import BreadCrumb from '@components/BreadCrumb'
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({ weight: "500", subsets: ['devanagari'] })
+import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,12 +20,9 @@ const RootLayout = ({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className={classNames(inter.className, 'flex flex-col min-h-screen justify-between')} id='app-body'>
-        <Header />
-        <main id='main' className='mb-auto pt-[100px]'>
-          <div className='p-4'>
-            <BreadCrumb />
-          </div>
+      <body className={classNames(poppins.className, 'flex flex-col min-h-screen justify-between')} id='app-body'>
+        {/* <Header /> */}
+        <main id='login-main'>
           {children}
         </main>
         <footer

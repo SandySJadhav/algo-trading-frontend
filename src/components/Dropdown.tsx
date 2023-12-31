@@ -8,10 +8,12 @@ type Props = {
     open: boolean,
     options?: DropdownOption[],
     onClose?: () => void,
-    onBlur?: (e: SyntheticEvent) => void
+    onBlur?: (e: SyntheticEvent) => void,
+    classes?: any,
+    onSelect?: (option: any) => void
 }
 
-const Dropdown = forwardRef(({ open, options, ...rest }: Props, ref?: ForwardedRef<any>) => {
+const Dropdown = forwardRef(({ open, options, classes = {}, onSelect, ...rest }: Props, ref?: ForwardedRef<any>) => {
     return (
         <AnimatePresence initial={false}>
             <motion.div
@@ -36,7 +38,8 @@ const Dropdown = forwardRef(({ open, options, ...rest }: Props, ref?: ForwardedR
                         },
                         {
                             'hidden pointer-events-none': !open
-                        }
+                        },
+                        classes.ul
                     )}
                     role='list'
                     variants={LI_ANIMATION}
@@ -44,23 +47,22 @@ const Dropdown = forwardRef(({ open, options, ...rest }: Props, ref?: ForwardedR
                     ref={ref}
                     {...rest}
                 >
-                    <motion.div className='dropdown-menu-corner' />
+                    <motion.div className={classNames('dropdown-menu-corner', classes.corner)} />
                     {options?.map(option => {
                         return <motion.li
-                            className='px-5 my-2 text-[#212529] flex flex-nowrap border-none font-normal clear-both w-full min-h-[20px] hover:text-master-blue focus:text-master-blue active:text-master-blue items-center'
+                            className={classNames('px-5 my-2 text-[#212529] flex flex-nowrap border-none font-normal clear-both w-full min-h-[20px] hover:text-master-blue focus:text-master-blue active:text-master-blue items-center', classes.li)}
                             tabIndex={0}
                             id={option.label}
                             key={option.label}
+                            onClick={() => onSelect?.(option)}
                         >
-                            {
-                                option.icon && <div className='w-7'>{option.icon}</div>
-                            }
+                            {option.icon && <div className='w-7'>{option.icon}</div>}
                             <div className='whitespace-nowrap'>{option.label}</div>
                         </motion.li>
                     })}
                 </motion.ul>
             </motion.div>
-        </AnimatePresence>
+        </AnimatePresence >
     );
 });
 
