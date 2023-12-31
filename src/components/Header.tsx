@@ -1,5 +1,5 @@
 "use client"
-import React, { SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { HiBars3, HiChevronDown } from "react-icons/hi2";
 import classNames from "classnames";
 import Modal from "./Modal";
@@ -9,7 +9,7 @@ import { DropdownOption } from "../types";
 import { NavigationMenus } from "@constants/Menu";
 import { useRouter } from "next/navigation";
 
-const NavigationWithDropdown = ({ label, subMenus = [], url }: DropdownOption) => {
+const NavigationWithDropdown = ({ label, subMenus = [], url, icon }: DropdownOption) => {
     const router = useRouter();
     const [panelOpen, setPanelOpen] = useState(false);
     const dropdownRef = useRef<HTMLUListElement>();
@@ -47,8 +47,9 @@ const NavigationWithDropdown = ({ label, subMenus = [], url }: DropdownOption) =
         onClick={handleNavItemClick}
         onKeyDown={e => e.key === 'Enter' && handleNavItemClick()}
     >
-        <div className="flex items-center justify-between h-full">
-            <span>{label}</span>
+        <div className="flex items-center justify-start h-full">
+            {icon}
+            <span className="min-w-10 text-center">{label}</span>
             {subMenus?.length > 0 && <HiChevronDown className="inline ml-2" />}
         </div>
         {
@@ -87,7 +88,7 @@ const Header = () => {
         <header className={classNames("header", {
             'header-fixed': floatHeader
         })}>
-            <div className="container">
+            <div className="px-20 lg:px-30 xl:px-40">
                 <div className="h-[100px]">
                     <div className="flex items-center justify-between h-full">
                         <div className="flex items-center">
@@ -97,6 +98,7 @@ const Header = () => {
                                 width={100}
                                 height={40}
                                 src={"/logo.jpg"}
+                                priority
                             />
                         </div>
                         <div className="flex items-center md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
