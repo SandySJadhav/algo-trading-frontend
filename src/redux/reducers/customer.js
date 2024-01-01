@@ -18,7 +18,7 @@ export const customerSlice = createSlice({
       }
     },
     setCustomer: (state, action) => {
-      console.log('User set ---> ', action.payload);
+      console.log('User set in store ---> ', action.payload);
       state.loading = false;
       state.loaded = true;
       state.details = action.payload;

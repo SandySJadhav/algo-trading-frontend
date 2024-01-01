@@ -1,6 +1,5 @@
 "use client";
 
-import { setCustomer } from "../redux/reducers/customer";
 import { validateEmail, validatePass } from "../utils";
 import Button from "./Button";
 import GoogleSignIn from "./GoogleSignIn";
@@ -41,10 +40,8 @@ const SignUp = () => {
     setEmailAlreadyInUse(false);
     const { email, password } = data;
     createUserWithEmailAndPassword(Firebase.auth, email, password)
-      .then(({ user }: any) => {
+      .then(() => {
         router.push("/");
-        // set redux state
-        dispatch(setCustomer(user));
       })
       .catch((error: any) => {
         const errorCode = error.code;

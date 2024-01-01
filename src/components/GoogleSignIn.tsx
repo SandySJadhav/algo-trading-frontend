@@ -1,6 +1,5 @@
 "use client";
 
-import { setCustomer } from "../redux/reducers/customer";
 import Button from "./Button";
 import Firebase from "@services/GoogleApp";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -22,13 +21,9 @@ const GoogleSignIn = ({ variant, label }: Prop) => {
   const handleOnClick = () => {
     setError("");
     signInWithPopup(Firebase.auth, Firebase.provider)
-      .then((result: any) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
+      .then(() => {
         // The signed-in user info.
         router.push("/");
-        // set redux state
-        dispatch(setCustomer(result.user));
       })
       .catch((error) => {
         console.log(error);

@@ -122,10 +122,9 @@ const Header = () => {
   }, [onScroll]);
 
   useEffect(() => {
-    console.log("Checking existing user session");
+    console.log("Checking session");
     dispatch(setUserLoading(true));
     onAuthStateChanged(Firebase.auth, (user: any) => {
-      console.log(user ? "Found user session" : "User Session not found");
       if (!user && pathname !== "/login" && pathname !== "register") {
         // no user login found
         router.push("/login");
