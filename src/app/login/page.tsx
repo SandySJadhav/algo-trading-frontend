@@ -1,7 +1,8 @@
 import SignIn from "@components/SignIn";
+import StoreWrapper from "@components/StoreWrapper";
 
-const Home = () => {
-  return (<SignIn />)
+const Login = () => {
+  return <StoreWrapper><SignIn /></StoreWrapper>
 }
 
-export default Home;
+export default Login;

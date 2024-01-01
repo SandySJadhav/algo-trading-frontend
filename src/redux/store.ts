@@ -10,8 +10,8 @@ const store = configureStore({
   //Redux logger middleware to log store states for dev env
   middleware: getDefaultMiddleware =>
     env === 'dev'
-      ? getDefaultMiddleware().concat(require('redux-logger').logger)
-      : getDefaultMiddleware()
+      ? getDefaultMiddleware({ serializableCheck: false }).concat(require('redux-logger').logger)
+      : getDefaultMiddleware({ serializableCheck: false })
 });
 
 export default store;

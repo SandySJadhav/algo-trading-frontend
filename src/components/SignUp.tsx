@@ -3,13 +3,18 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useForm } from 'react-hook-form';
+import { useRouter } from "next/navigation";
 import Firebase from '@services/GoogleApp';
 import GoogleSignIn from "./GoogleSignIn";
 import Button from "./Button";
 import TextField from "./TextField";
 import { validateEmail, validatePass } from "../utils";
+import { useDispatch } from "react-redux";
+import { setCustomer, setSession } from "../redux/reducers/customer";
 
 const SignUp = () => {
+    const router = useRouter();
+    const dispatch = useDispatch()
     const defaultValues = useMemo(() => ({
         email: '',
         password: '',
@@ -32,10 +37,14 @@ const SignUp = () => {
         const { email, password } = data;
         createUserWithEmailAndPassword(Firebase.auth, email, password)
             .then(({ user }: any) => {
+                router.push("/");
                 // Signed up
                 localStorage.setItem("accessToken", user.stsTokenManager.accessToken);
                 localStorage.setItem("refreshToken", user.stsTokenManager.refreshToken);
                 localStorage.setItem("expirationTime", user.stsTokenManager.expirationTime);
+                // set redux state
+                dispatch(setCustomer(user));
+                dispatch(setSession(user.stsTokenManager));
             })
             .catch((error: any) => {
                 const errorCode = error.code;
@@ -48,7 +57,7 @@ const SignUp = () => {
     }
 
     return <form onSubmit={handleSubmit(handleRegister)} className='p-0'>
-        <div className="bg-pp overflow-auto w-full min-h-screen grid grid-cols-1 place-content-center">
+        <div className="overflow-auto w-full min-h-screen grid grid-cols-1 place-content-center">
             <div className="rounded-lg bg-white md:w-[526px] sm:w-full justify-self-center shadow-master">
                 <div className="relative flex p-10 flex-col space-6 my-10">
                     <div className="flex flex-col md:mx-8">
@@ -91,7 +100,7 @@ const SignUp = () => {
                         <Button
                             type="submit"
                             variant="primary"
-                            className="w-full bg-pp"
+                            className="w-full"
                         >
                             SIGN UP
                         </Button>

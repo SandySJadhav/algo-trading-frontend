@@ -4,6 +4,7 @@ import { Poppins } from 'next/font/google'
 import classNames from 'classnames'
 const poppins = Poppins({ weight: "500", subsets: ['devanagari'] })
 import './globals.css'
+import HeaderWrapper from '@components/Header'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,6 +22,7 @@ const RootLayout = ({
         <link rel="icon" type='image/x-icon' href="/favicon.ico" sizes="96x96" />
       </head>
       <body className={classNames(poppins.className, 'flex flex-col min-h-screen justify-between')} id='app-body'>
+        <HeaderWrapper />
         <main id='login-main'>
           {children}
         </main>
