@@ -2,21 +2,21 @@ export const UL_ANIMATION = {
   open: {
     opacity: 1,
     transition: {
-      type: 'spring',
+      type: "spring",
       bounce: 0,
       duration: 0.7,
       delayChildren: 0.3,
-      staggerChildren: 0.05
-    }
+      staggerChildren: 0.05,
+    },
   },
   closed: {
     opacity: 0,
     transition: {
-      type: 'spring',
+      type: "spring",
       bounce: 0,
-      duration: 0.3
-    }
-  }
+      duration: 0.3,
+    },
+  },
 };
 
 export const LI_ANIMATION = {
@@ -24,10 +24,10 @@ export const LI_ANIMATION = {
     opacity: 1,
     y: 0,
     transition: {
-      type: 'spring',
+      type: "spring",
       stiffness: 400,
-      damping: 30
-    }
+      damping: 30,
+    },
   },
   closed: {
     opacity: 0,
@@ -35,7 +35,7 @@ export const LI_ANIMATION = {
     transition: {
       duration: 1,
       stiffness: 400,
-      damping: 30
-    }
-  }
+      damping: 30,
+    },
+  },
 };
