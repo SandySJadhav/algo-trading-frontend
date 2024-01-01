@@ -8,10 +8,10 @@ type Prop = {
   onClick?: () => void,
   name?: string,
   icon?: any,
-  type?: string
+  type?: 'submit' | 'reset' | 'button'
 }
 
-const Button = ({ children, className, variant, icon, ...props }: Prop) => {
+const Button = ({ children, className, variant, icon, type = 'button',...props }: Prop) => {
   const primary = variant === "primary";
   const secondary = variant === "secondary";
   const danger = variant === "danger";
@@ -20,7 +20,7 @@ const Button = ({ children, className, variant, icon, ...props }: Prop) => {
   const buttonClasses = classNames(
     "uppercase",
     "cursor-pointer",
-    "text-xs",
+    "text-sm",
     "rounded-lg",
     "flex",
     "shadow-none",
@@ -48,7 +48,7 @@ const Button = ({ children, className, variant, icon, ...props }: Prop) => {
     className
   );
   return (
-    <button {...props} className={buttonClasses} type="button">
+    <button {...props} className={buttonClasses} type={type}>
       <div className="flex">{children}</div>
       {icon && <div className="flex ml-2 text-2xl">{icon}</div>}
     </button>

@@ -9,7 +9,6 @@ import Link from "next/link";
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [phone, setPhone] = useState("");
 
     return <div className="bg-pp overflow-auto w-full min-h-screen grid grid-cols-1 place-content-center">
         <div className="rounded-lg bg-white md:w-[526px] sm:w-full justify-self-center shadow-master">
@@ -37,14 +36,6 @@ const SignIn = () => {
                 </div>
                 <div className="block mt-6 md:mx-8">
                     <TextField
-                        type="text"
-                        placeholder="Phone"
-                        value={phone}
-                        onChange={setPhone}
-                    />
-                </div>
-                <div className="block mt-6 md:mx-8">
-                    <TextField
                         type="password"
                         placeholder="Password"
                         value={password}
@@ -52,7 +43,11 @@ const SignIn = () => {
                     />
                 </div>
                 <div className="block mt-6 md:mx-8">
-                    <Button variant="primary" className="w-full bg-pp">
+                    <Button
+                        type="submit"
+                        variant="primary"
+                        className="w-full bg-pp"
+                    >
                         SIGN IN
                     </Button>
                 </div>

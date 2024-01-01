@@ -19,6 +19,7 @@ const GoogleSignIn = ({ variant, label }: Prop) => {
         const token = credential?.accessToken;
         // The signed-in user info.
         const user = result.user;
+        console.log(user);
       }).catch((error) => {
         console.log(error);
         // Handle Errors here.
@@ -32,6 +33,7 @@ const GoogleSignIn = ({ variant, label }: Prop) => {
   }
 
   return <Button
+    type='button'
     variant={variant}
     onClick={handleOnClick}
     name="google"
