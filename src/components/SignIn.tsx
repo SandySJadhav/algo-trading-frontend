@@ -1,6 +1,6 @@
 "use client";
 
-import { setCustomer, setSession } from "../redux/reducers/customer";
+import { setCustomer } from "../redux/reducers/customer";
 import { validateEmail } from "../utils";
 import Button from "./Button";
 import GoogleSignIn from "./GoogleSignIn";
@@ -40,17 +40,8 @@ const SignIn = () => {
     signInWithEmailAndPassword(Firebase.auth, email, password)
       .then(({ user }: any) => {
         router.push("/");
-        console.log(user);
-        // Signed up
-        localStorage.setItem("accessToken", user.stsTokenManager.accessToken);
-        localStorage.setItem("refreshToken", user.stsTokenManager.refreshToken);
-        localStorage.setItem(
-          "expirationTime",
-          user.stsTokenManager.expirationTime
-        );
         // set redux state
         dispatch(setCustomer(user));
-        dispatch(setSession(user.stsTokenManager));
       })
       .catch((error: any) => {
         const errorCode = error.code;

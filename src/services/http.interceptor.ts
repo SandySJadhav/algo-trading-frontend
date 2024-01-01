@@ -1,4 +1,3 @@
-
 // NEW HTTP ENDPOINTS
 const APIM_ENV = process.env.APIM_ENV;
 
@@ -7,49 +6,49 @@ const APIMSession = {
   get getToken() {
     return this.token;
   },
-  set setToken(token) {
+  set setToken(token: string) {
     this.token = token;
-  }
+  },
 };
 
 export const getUserSession = () => APIMSession.getToken;
 
-export const setUserSession = token => {
+export const setUserSession = (token: string) => {
   APIMSession.setToken = token;
 };
 
-export const getRequest = async url => {
+export const getRequest = async (url: string) => {
   const response = await fetch(APIM_ENV + url, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + APIMSession.token
-    }
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + APIMSession.token,
+    },
   });
   const data = await response.json();
   return data;
 };
 
-export const postRequest = async (url, body) => {
+export const postRequest = async (url: string, body: any) => {
   const response = await fetch(APIM_ENV + url, {
-    method: 'POST',
+    method: "POST",
     body: body ? JSON.stringify(body) : null,
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + APIMSession.token
-    }
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + APIMSession.token,
+    },
   });
   const data = await response.json();
   return data;
 };
 
-export const deleteRequest = async url => {
+export const deleteRequest = async (url: string) => {
   const response = await fetch(APIM_ENV + url, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + APIMSession.token
-    }
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + APIMSession.token,
+    },
   });
   const data = await response.json();
   return data;

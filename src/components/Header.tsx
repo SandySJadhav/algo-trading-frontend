@@ -1,16 +1,19 @@
 "use client";
 
+import { setCustomer, setUserLoading } from "../redux/reducers/customer";
 import { DropdownOption } from "../types";
 import Dropdown from "./Dropdown";
 import Modal from "./Modal";
 import StoreWrapper from "./StoreWrapper";
 import { NavigationMenus } from "@constants/Menu";
+import Firebase from "@services/GoogleApp";
 import classNames from "classnames";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { HiBars3, HiChevronDown } from "react-icons/hi2";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavigationWithDropdown = ({
   label,
@@ -48,6 +51,25 @@ const NavigationWithDropdown = ({
     }
   };
 
+  const handleOnSelect = (selection: any) => {
+    switch (selection.label) {
+      case "Logout":
+        signOut(Firebase.auth)
+          .then(() => {
+            console.log("Sign-out successful.");
+          })
+          .catch((error) => {
+            console.log("Failed to logout", error);
+          });
+        localStorage.clear();
+        router.push("/login");
+        return;
+
+      default:
+        return;
+    }
+  };
+
   return (
     <div
       key={label}
@@ -68,6 +90,7 @@ const NavigationWithDropdown = ({
           onClose={() => setPanelOpen(false)}
           ref={dropdownRef}
           onBlur={handleOnBlur}
+          onSelect={handleOnSelect}
         />
       )}
     </div>
@@ -75,6 +98,10 @@ const NavigationWithDropdown = ({
 };
 
 const Header = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const [floatHeader, setFloatHeader] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const customer = useSelector((state: any) => state.customer);
@@ -94,7 +121,26 @@ const Header = () => {
     };
   }, [onScroll]);
 
-  if (!customer.isAuth) {
+  useEffect(() => {
+    console.log("Checking existing user session");
+    dispatch(setUserLoading(true));
+    onAuthStateChanged(Firebase.auth, (user: any) => {
+      console.log(user ? "Found user session" : "User Session not found");
+      if (!user && pathname !== "/login" && pathname !== "register") {
+        // no user login found
+        router.push("/login");
+        dispatch(setUserLoading(false));
+      } else if (user) {
+        // user found, set redux state
+        dispatch(setCustomer(user));
+      } else {
+        // New user on login or register page
+        dispatch(setUserLoading(false));
+      }
+    });
+  }, []);
+
+  if (!customer.isAuth || pathname === "/login" || pathname === "/register") {
     return null;
   }
 

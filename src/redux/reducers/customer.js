@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  loading: false,
+  loaded: false,
   isAuth: false,
-  accessToken: null,
-  expiresAt: null,
   details: null
 };
 
@@ -11,12 +11,17 @@ export const customerSlice = createSlice({
   name: 'customer',
   initialState,
   reducers: {
-    setCustomer: (state, action) => {
-      state.details = action.payload;
+    setUserLoading: (state, action) => {
+      state.loading = action.payload;
+      if (!action.payload) {
+        state.loaded = true;
+      }
     },
-    setSession: (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.expiresAt = action.payload.expirationTime;
+    setCustomer: (state, action) => {
+      console.log('User set ---> ', action.payload);
+      state.loading = false;
+      state.loaded = true;
+      state.details = action.payload;
       if (action.payload.accessToken) {
         state.isAuth = true;
       }
@@ -24,6 +29,6 @@ export const customerSlice = createSlice({
   }
 });
 
-export const { setCustomer, setSession } = customerSlice.actions;
+export const { setCustomer, setUserLoading } = customerSlice.actions;
 
 export default customerSlice.reducer;

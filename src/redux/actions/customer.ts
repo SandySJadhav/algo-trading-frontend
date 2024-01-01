@@ -1,4 +1,1 @@
-
-export const setCustomer = async (body: any) => {
-
-};
+export const setCustomer = async (body: any) => {};
