@@ -3,6 +3,7 @@
     "tabWidth": 2,
     "trailingComma": "none",
     "jsxSingleQuote": true,
+    "tsxSingleQuote": true,
     "arrowParens": "avoid",
     "importOrder": [
         "^react(.*)$",
@@ -11,7 +12,7 @@
         "^@components/(.*)$",
         "^@services(.*)$",
         "^@constants/(.*)$",
-        "^framer-motion",
+        "^@actions/(.*)$",
         "<THIRD_PARTY_MODULES>",
         "^[./]"
     ]
