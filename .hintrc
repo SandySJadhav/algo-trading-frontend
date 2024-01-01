@@ -1,5 +1,14 @@
 {
   "extends": [
     "development"
-  ]
+  ],
+  "hints": {
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-active": "off"
+      }
+    ],
+    "apple-touch-icons": "off"
+  }
 }

@@ -10,11 +10,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 
 const SignUp = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const defaultValues = useMemo(
     () => ({
@@ -71,6 +69,7 @@ const SignUp = () => {
             </div>
             <div className="block mt-10 md:mx-8">
               <TextField
+                id="email"
                 error={errors?.["email"]?.message}
                 type="email"
                 placeholder="Email"
@@ -82,6 +81,7 @@ const SignUp = () => {
             </div>
             <div className="block mt-6 md:mx-8">
               <TextField
+                id="password"
                 error={errors?.["password"]?.message}
                 type="password"
                 placeholder="Password"

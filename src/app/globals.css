@@ -5,6 +5,7 @@
 html,
 body {
   background: #fefefe;
+  letter-spacing: 0.47px;
 }
 
 *:focus {
@@ -131,4 +132,8 @@ body {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
+}
+
+.user-profile {
+  background-color: #eee;
 }

@@ -1,0 +1,10 @@
+{
+  "theme_color": "#6873e0",
+  "background_color": "#fefefe",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Algo - To the future",
+  "short_name": "Algo - To the future",
+  "description": "Algo - To the future"
+}

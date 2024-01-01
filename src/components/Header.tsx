@@ -5,7 +5,12 @@ import { DropdownOption } from "../types";
 import Dropdown from "./Dropdown";
 import Modal from "./Modal";
 import StoreWrapper from "./StoreWrapper";
-import { NavigationMenus } from "@constants/Menu";
+import {
+  MobileNavigationMenus,
+  MobileUserMenus,
+  NavigationMenus,
+  UserMenus,
+} from "@constants/Menu";
 import Firebase from "@services/GoogleApp";
 import classNames from "classnames";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -54,18 +59,18 @@ const NavigationWithDropdown = ({
   const handleOnSelect = (selection: any) => {
     switch (selection.label) {
       case "Logout":
-        signOut(Firebase.auth)
-          .then(() => {
-            console.log("Sign-out successful.");
-          })
-          .catch((error) => {
-            console.log("Failed to logout", error);
-          });
+        signOut(Firebase.auth).catch((error) => {
+          console.log("Failed to logout", error);
+        });
         localStorage.clear();
         router.push("/login");
         return;
 
       default:
+        if (selection.url) {
+          router.push(selection.url);
+        }
+        console.log(selection);
         return;
     }
   };
@@ -74,13 +79,19 @@ const NavigationWithDropdown = ({
     <div
       key={label}
       tabIndex={0}
-      className="select-none p-4 hover:text-master-blue active:text-master-blue focus:text-master-blue cursor-pointer"
+      className="select-none p-4 text-master-gray hover:text-master-blue active:text-master-blue focus:text-master-blue cursor-pointer"
       onClick={handleNavItemClick}
       onKeyDown={(e) => e.key === "Enter" && handleNavItemClick()}
     >
       <div className="flex items-center justify-start h-full">
         {icon}
-        <span className="min-w-10 text-center">{label}</span>
+        <span
+          className={classNames("min-w-10 text-center", {
+            "ml-2": icon,
+          })}
+        >
+          {label}
+        </span>
         {subMenus?.length > 0 && <HiChevronDown className="inline ml-2" />}
       </div>
       {subMenus?.length > 0 && (
@@ -104,7 +115,8 @@ const Header = () => {
 
   const [floatHeader, setFloatHeader] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const customer = useSelector((state: any) => state.customer);
+  const { isAuth, details } = useSelector((state: any) => state.customer);
+  const { displayName, email } = details || {};
 
   const onScroll = useCallback(() => {
     if (window.scrollY > 9) {
@@ -122,16 +134,19 @@ const Header = () => {
   }, [onScroll]);
 
   useEffect(() => {
-    console.log("Checking session");
+    console.log("Checking session...");
     dispatch(setUserLoading(true));
     onAuthStateChanged(Firebase.auth, (user: any) => {
-      if (!user && pathname !== "/login" && pathname !== "register") {
+      if (!user && pathname !== "/login" && pathname !== "/register") {
         // no user login found
         router.push("/login");
         dispatch(setUserLoading(false));
       } else if (user) {
         // user found, set redux state
         dispatch(setCustomer(user));
+        if (pathname === "/login" || pathname === "/register") {
+          router.push("/");
+        }
       } else {
         // New user on login or register page
         dispatch(setUserLoading(false));
@@ -139,7 +154,7 @@ const Header = () => {
     });
   }, []);
 
-  if (!customer.isAuth || pathname === "/login" || pathname === "/register") {
+  if (!isAuth || pathname === "/login" || pathname === "/register") {
     return null;
   }
 
@@ -149,7 +164,7 @@ const Header = () => {
         "header-fixed": floatHeader,
       })}
     >
-      <div className="px-20 lg:px-30 xl:px-40">
+      <div className="px-20 lg:px-30 xl:px-40 2xl:px-96">
         <div className="h-[100px]">
           <div className="flex items-center justify-between h-full">
             <div className="flex items-center">
@@ -168,18 +183,29 @@ const Header = () => {
             >
               <HiBars3 className="h-9 w-9" />
             </div>
-            <div className="hidden md:flex items-center justify-center p-0">
+            <div className="hidden md:flex items-center justify-between p-0">
               {NavigationMenus.map((menu) => (
                 <NavigationWithDropdown key={menu.label} {...menu} />
               ))}
+              <NavigationWithDropdown
+                {...UserMenus}
+                label={displayName || email}
+              />
             </div>
           </div>
         </div>
       </div>
       <Modal open={menuOpen} onClose={() => setMenuOpen(false)}>
-        {NavigationMenus.map((menu) => (
-          <NavigationWithDropdown key={menu.label} {...menu} />
-        ))}
+        <div className="flex">
+          <div className="flex flex-col w-1/2">
+            {MobileNavigationMenus.map((menu) => (
+              <NavigationWithDropdown key={menu.label} {...menu} />
+            ))}
+          </div>
+          <div className="flex flex-col">
+            <NavigationWithDropdown {...MobileUserMenus} />
+          </div>
+        </div>
       </Modal>
     </header>
   );

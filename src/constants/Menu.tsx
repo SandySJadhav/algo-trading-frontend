@@ -1,13 +1,30 @@
-import {
-  HiBell,
-  HiDocumentCheck,
-  HiEnvelope,
-  HiKey,
-  HiMiniWrenchScrewdriver,
-  HiPower,
-  HiUser,
-  HiUserCircle,
-} from "react-icons/hi2";
+import { HiMiniUser, HiPower, HiUser } from "react-icons/hi2";
+
+export const MobileNavigationMenus = [
+  {
+    label: "Dashboard",
+    url: "/",
+  },
+  {
+    label: "Strategies",
+    subMenus: [
+      {
+        label: "Create",
+        url: "/strategies/create",
+      },
+      {
+        label: "My Strategies",
+        url: "/strategies",
+      },
+      {
+        label: "Deployed",
+      },
+      {
+        label: "Backtest",
+      },
+    ],
+  },
+];
 
 export const NavigationMenus = [
   {
@@ -19,9 +36,11 @@ export const NavigationMenus = [
     subMenus: [
       {
         label: "Create",
+        url: "/strategies/create",
       },
       {
         label: "My Strategies",
+        url: "/strategies",
       },
       {
         label: "Deployed",
@@ -31,44 +50,42 @@ export const NavigationMenus = [
       },
     ],
   },
-  {
-    label: "Services",
-  },
-  {
-    label: "Reports",
-  },
-  {
-    label: "User",
-    icon: <HiUserCircle className="h-10 w-10" />,
-    subMenus: [
-      {
-        label: "Profile",
-        icon: <HiUser />,
-      },
-      {
-        label: "Subscriptions",
-        icon: <HiEnvelope />,
-      },
-      {
-        label: "Notifications",
-        icon: <HiBell />,
-      },
-      {
-        label: "Invoices",
-        icon: <HiDocumentCheck />,
-      },
-      {
-        label: "Change Password",
-        icon: <HiKey />,
-      },
-      {
-        label: "Help & Support",
-        icon: <HiMiniWrenchScrewdriver />,
-      },
-      {
-        label: "Logout",
-        icon: <HiPower />,
-      },
-    ],
-  },
 ];
+
+export const UserMenus = {
+  label: "User",
+  icon: (
+    <div className="flex col-flex justify-center rounded-full user-profile items-center h-10 w-10">
+      <div className="flex flex-col items-center mx-auto">
+        <HiMiniUser className="h-6 w-6" fill="#c7c7c7" />
+      </div>
+    </div>
+  ),
+  subMenus: [
+    {
+      label: "Profile",
+      icon: <HiUser />,
+      url: "/profile",
+    },
+    {
+      label: "Logout",
+      icon: <HiPower />,
+    },
+  ],
+};
+
+export const MobileUserMenus = {
+  label: "User",
+  icon: <HiMiniUser className="h-6 w-6" />,
+  subMenus: [
+    {
+      label: "Profile",
+      icon: <HiUser />,
+      url: "/profile",
+    },
+    {
+      label: "Logout",
+      icon: <HiPower />,
+    },
+  ],
+};
