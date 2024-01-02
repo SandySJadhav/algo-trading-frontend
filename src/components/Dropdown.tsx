@@ -1,5 +1,5 @@
 import { DropdownOption } from "../types";
-import { LI_ANIMATION } from "@constants/animations";
+import { LI_ANIMATION } from "@constants/Animations";
 import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { ForwardedRef, SyntheticEvent, forwardRef } from "react";

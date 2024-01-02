@@ -38,7 +38,7 @@ type Prop = {
 
 const ReactTimePicker = ({ title, onChange }: Prop) => {
   const [time, setTime] = useState({
-    hours: "10",
+    hours: "07",
     minutes: "00",
     meredian: "AM",
   });
@@ -112,6 +112,7 @@ const ReactTimePicker = ({ title, onChange }: Prop) => {
         <div className="flex w-2"></div>
         <select
           title="meredian"
+          className="py-1"
           onChange={(e) => handleOnSelect(e.target.value)}
           value={time.meredian}
         >

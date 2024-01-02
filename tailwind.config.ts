@@ -11,11 +11,15 @@ const config: Config = {
       backgroundColor: {
         "master-blue": "#6873e0",
         "master-pink": "#ff8081",
+        "master-green": "#22c993",
+        "master-red": "#f05858",
       },
       textColor: {
         "master-gray": "#212529",
         "master-blue": "#6873e0",
         "master-pink": "#ff8081",
+        "master-green": "#22c993",
+        "master-red": "#f05858",
       },
       boxShadow: {
         master: "0 .5rem 1rem rgba(0,0,0,.15)",

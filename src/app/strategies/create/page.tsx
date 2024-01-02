@@ -1,5 +1,6 @@
 import Box from "@components/Box";
 import ReactTimePicker from "@components/ReactTimePicker";
+import Search from "@components/Search";
 import TextField from "@components/TextField";
 import type { Metadata } from "next";
 
@@ -35,13 +36,7 @@ const CreateStrategy = () => {
       <Box title="Trading Setup" containerClass="">
         <div className="flex space-x-3">
           <div className="mt-4 w-full md:w-1/2">
-            <TextField
-              name="Instrument"
-              id="Instrument"
-              title="Instrument Name"
-              value="Crude Oil"
-              disabled
-            />
+            <Search />
           </div>
           <div className="mt-4 w-full md:w-1/2">
             <TextField
@@ -58,16 +53,10 @@ const CreateStrategy = () => {
         </div>
         <div className="flex space-x-3">
           <div className="w-full md:w-1/2">
-            <ReactTimePicker title="Entry At" />
+            <ReactTimePicker title="EntryAt" />
           </div>
-          <div className="mt-4 w-full md:w-1/2">
-            {/* <TextField
-              name="Exit"
-              id="Exit"
-              title="Exit At"
-              value=""
-              placeholder=""
-            /> */}
+          <div className="w-full md:w-1/2">
+            <ReactTimePicker title="ExitAt" />
           </div>
         </div>
       </Box>
