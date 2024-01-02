@@ -57,15 +57,8 @@ const CreateStrategy = () => {
           <p>AND</p>
         </div>
         <div className="flex space-x-3">
-          <div className="mt-4 w-full md:w-1/2">
-            <ReactTimePicker />
-            {/* <TextField
-              name="Entry"
-              id="Entry"
-              title="Entry At"
-              value=""
-              placeholder=""
-            /> */}
+          <div className="w-full md:w-1/2">
+            <ReactTimePicker title="Entry At" />
           </div>
           <div className="mt-4 w-full md:w-1/2">
             {/* <TextField

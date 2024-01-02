@@ -137,3 +137,11 @@ body {
 .user-profile {
   background-color: #eee;
 }
+
+.custom_number_input,
+.custom_number_input::-webkit-outer-spin-button,
+.custom_number_input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+}
