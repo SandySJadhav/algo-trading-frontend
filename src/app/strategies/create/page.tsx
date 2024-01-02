@@ -1,4 +1,5 @@
 import Box from "@components/Box";
+import ReactTimePicker from "@components/ReactTimePicker";
 import TextField from "@components/TextField";
 import type { Metadata } from "next";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 const CreateStrategy = () => {
   return (
-    <div className="relative px-20 lg:px-30 xl:px-40 2xl:px-96 pt-[120px]">
+    <div className="relative px-5 md:px-20 lg:px-30 xl:px-40 2xl:px-96 pt-[120px]">
       <h2 className="text-center font-bold text-3xl pb-5">Create Strategy</h2>
       <Box title="Basic Info">
         <div className="mt-4 w-full md:w-1/2">
@@ -29,6 +30,52 @@ const CreateStrategy = () => {
             name="description"
             rows={4}
           />
+        </div>
+      </Box>
+      <Box title="Trading Setup" containerClass="">
+        <div className="flex space-x-3">
+          <div className="mt-4 w-full md:w-1/2">
+            <TextField
+              name="Instrument"
+              id="Instrument"
+              title="Instrument Name"
+              value="Crude Oil"
+              disabled
+            />
+          </div>
+          <div className="mt-4 w-full md:w-1/2">
+            <TextField
+              name="Strategy"
+              id="Strategy"
+              title="Strategy Type"
+              value="Intraday"
+              disabled
+            />
+          </div>
+        </div>
+        <div className="custom_hr">
+          <p>AND</p>
+        </div>
+        <div className="flex space-x-3">
+          <div className="mt-4 w-full md:w-1/2">
+            <ReactTimePicker />
+            {/* <TextField
+              name="Entry"
+              id="Entry"
+              title="Entry At"
+              value=""
+              placeholder=""
+            /> */}
+          </div>
+          <div className="mt-4 w-full md:w-1/2">
+            {/* <TextField
+              name="Exit"
+              id="Exit"
+              title="Exit At"
+              value=""
+              placeholder=""
+            /> */}
+          </div>
         </div>
       </Box>
     </div>

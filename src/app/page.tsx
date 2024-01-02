@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 const Home = () => {
   return (
-    <div className="relative px-20 lg:px-30 xl:px-40 2xl:px-96 pt-[120px]">
+    <div className="relative px-5 md:px-20 lg:px-30 xl:px-40 2xl:px-96 pt-[120px]">
       Home
     </div>
   );

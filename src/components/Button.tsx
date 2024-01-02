@@ -47,7 +47,7 @@ const Button = ({
         secondary,
     },
     {
-      "bg-danger text-white hover:shadow-xl active:shadow-xl focus:shadow-xl":
+      "bg-master-pink text-white hover:shadow-xl active:shadow-xl focus:shadow-xl":
         danger,
     },
     {

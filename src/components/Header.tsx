@@ -127,6 +127,9 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    if (window.scrollY > 9) {
+      setFloatHeader(true);
+    }
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
@@ -164,7 +167,7 @@ const Header = () => {
         "header-fixed": floatHeader,
       })}
     >
-      <div className="px-20 lg:px-30 xl:px-40 2xl:px-96">
+      <div className="px-5 md:px-20 lg:px-30 xl:px-40 2xl:px-96">
         <div className="h-[100px]">
           <div className="flex items-center justify-between h-full">
             <div className="flex items-center">
