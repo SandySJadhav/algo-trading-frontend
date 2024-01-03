@@ -6,7 +6,6 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useDispatch } from "react-redux";
 
 type Prop = {
   variant?: string;
@@ -15,7 +14,6 @@ type Prop = {
 
 const GoogleSignIn = ({ variant, label }: Prop) => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [error, setError] = useState("");
 
   const handleOnClick = () => {

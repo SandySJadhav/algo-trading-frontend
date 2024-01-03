@@ -1,10 +1,10 @@
 "use client";
 
+import { debounce } from "../utils";
 import Dropdown from "./Dropdown";
 import TextField from "./TextField";
-import { searchAction } from "@actions/search";
+import { searchScriptAction } from "@actions/search";
 import { useCallback, useEffect, useState } from "react";
-import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
 
 type Prop = {
   onSelect?: () => void;
@@ -14,15 +14,20 @@ const Search = ({ onSelect }: Prop) => {
   const [results, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const getResults = useCallback(async () => {
-    const searchResults = await searchAction({ searchText: searchTerm });
-    if (searchResults.statusCode === 200) {
-      const filteredResults = [];
-      searchResults.data.forEach((result: any) => {
-        console.log(result.expiry);
-      });
-    }
-  }, [searchTerm]);
+  const getResults = useCallback(
+    debounce(async () => {
+      const searchResults = await searchScriptAction({ searchTerm });
+      if (searchResults?.statusCode === 200) {
+        const filteredResults = [];
+        searchResults.data.forEach((result: any) => {
+          console.log(result);
+        });
+      } else {
+        console.error("Failed to get search results");
+      }
+    }, 700),
+    []
+  );
 
   useEffect(() => {
     if (searchTerm.length > 2) {
@@ -34,16 +39,11 @@ const Search = ({ onSelect }: Prop) => {
 
   return (
     <div>
-      <TextField title="Instrument" searchIcon={true} />
-      {/* <div className="grid content-center p-4">
-        <label className="relative flex h-10">
-          <span className="sr-only">Search</span>
-          <span className="absolute inset-y-0 left-0 flex items-center pl-2 text-slate-400">
-            <HiOutlineMagnifyingGlass />
-          </span>
-
-        </label>
-      </div> */}
+      <TextField
+        title="Instrument"
+        searchIcon={true}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       <Dropdown
         classes={{
           ul: "pt-0 mt-0 ml-5",
