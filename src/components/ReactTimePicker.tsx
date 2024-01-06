@@ -40,7 +40,7 @@ const ReactTimePicker = ({ title, onChange }: Prop) => {
   const [time, setTime] = useState({
     hours: "07",
     minutes: "00",
-    meredian: "AM",
+    meredian: "PM",
   });
 
   const handleOnChange = useCallback(
@@ -77,13 +77,13 @@ const ReactTimePicker = ({ title, onChange }: Prop) => {
   };
 
   return (
-    <div className="relative flex flex-col">
+    <div className="relative flex flex-col w-full">
       {title && (
         <label className="flex text-sm font-medium text-slate-700 mb-2 ml-1">
           {title}
         </label>
       )}
-      <div className="flex border rounded-md text-slate-500 p-3 text-base items-center justify-center max-w-36">
+      <div className="flex border rounded-md text-slate-500 p-3 text-base items-center justify-center">
         <div className="flex justify-center items-center">
           <input
             className="custom_number_input flex w-5 items-end"

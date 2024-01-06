@@ -6,7 +6,7 @@ type Prop = {
   loading?: boolean;
   options: any;
   onClose: () => void;
-  onSelect?: (selection: any) => void;
+  onSelect: (selection: any) => void;
 };
 
 const ReactSelect = forwardRef(
@@ -41,7 +41,7 @@ const ReactSelect = forwardRef(
                 <div
                   tabIndex={1}
                   key={option.label}
-                  onClick={() => onSelect?.(option.value)}
+                  onClick={() => onSelect(option.value)}
                   className="react-select-option bg-transparent cursor-default block py-2 px-3 w-full box-border hover:bg-blue-200"
                 >
                   <div className="flex justify-between items-center select-none">

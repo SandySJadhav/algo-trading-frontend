@@ -7,10 +7,11 @@ import { searchScriptAction } from "@actions/search";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Prop = {
-  onSelect?: (selection: any) => void;
+  onSelect: (selection: any) => void;
+  selection: any;
 };
 
-const Search = ({ onSelect }: Prop) => {
+const Search = ({ onSelect, selection }: Prop) => {
   const searchBoxRef = useRef();
   const selectRef = useRef();
 
@@ -41,6 +42,12 @@ const Search = ({ onSelect }: Prop) => {
   );
 
   useEffect(() => {
+    if (
+      (selection?.displayName || selection?.symbol) &&
+      searchTerm !== (selection?.displayName || selection?.symbol)
+    ) {
+      onSelect(null);
+    }
     if (searchTerm.length > 1) {
       setLoading(true);
       setResults([]);
@@ -63,9 +70,16 @@ const Search = ({ onSelect }: Prop) => {
 
   const handleOnSelect = (option: any) => {
     setOpen(false);
-    setSearchTerm("");
+    setSearchTerm(option.displayName || option.symbol);
     setResults([]);
-    onSelect?.(option);
+    onSelect(option);
+  };
+
+  const handleTextChange = (e: any) => {
+    setSearchTerm(e.target.value);
+    if (selection?.symbol !== e.target.value) {
+      onSelect(null);
+    }
   };
 
   return (
@@ -77,7 +91,7 @@ const Search = ({ onSelect }: Prop) => {
         title="Instrument"
         isSearchable={true}
         loading={loading}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleTextChange}
         placeholder="Eg. Nifty"
         value={searchTerm}
       />
