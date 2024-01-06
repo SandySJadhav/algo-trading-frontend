@@ -55,9 +55,9 @@ export const NavigationMenus = [
 export const UserMenus = {
   label: "User",
   icon: (
-    <div className="flex col-flex justify-center rounded-full user-profile items-center h-10 w-10">
+    <div className="flex col-flex justify-center rounded-full user-profile items-center h-9 w-9">
       <div className="flex flex-col items-center mx-auto">
-        <HiMiniUser className="h-6 w-6" fill="#c7c7c7" />
+        <HiMiniUser className="h-4 w-4" fill="#c7c7c7" />
       </div>
     </div>
   ),

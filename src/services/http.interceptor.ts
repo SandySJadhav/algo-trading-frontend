@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 // NEW HTTP ENDPOINTS
 const APIM_ENV = process.env.APIM_ENV;
 
@@ -17,18 +19,6 @@ export const setUserSession = (token: string) => {
   APIMSession.setToken = token;
 };
 
-export const getRequest = async (url: string) => {
-  const response = await fetch(APIM_ENV + url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + APIMSession.token,
-    },
-  });
-  const data = await response.json();
-  return data;
-};
-
 export const postRequest = async (url: string, body: any) => {
   const response = await fetch(APIM_ENV + url, {
     method: "POST",
@@ -39,17 +29,23 @@ export const postRequest = async (url: string, body: any) => {
     },
   });
   const data = await response.json();
+  if (data.statusCode !== 200) {
+    toast.error(data.statusCode + ": " + data.message);
+  }
   return data;
 };
 
-export const deleteRequest = async (url: string) => {
+export const getRequest = async (url: string) => {
   const response = await fetch(APIM_ENV + url, {
-    method: "DELETE",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + APIMSession.token,
     },
   });
   const data = await response.json();
+  if (data.statusCode !== 200) {
+    toast.error(data.statusCode + ": " + data.message);
+  }
   return data;
 };

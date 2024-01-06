@@ -1,6 +1,5 @@
 "use client";
 
-// import Search from "./Search";
 import { useState } from "react";
 
 const Table = () => {
@@ -16,7 +15,6 @@ const Table = () => {
     <div className="px-4 not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
       <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
       <div className="relative rounded-xl overflow-auto">
-        {/* <Search onSelect={onSelect} /> */}
         <div className="shadow-sm overflow-hidden my-8">
           <table className="border-collapse table-auto w-full text-sm">
             <thead>

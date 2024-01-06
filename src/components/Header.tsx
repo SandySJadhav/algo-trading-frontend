@@ -60,7 +60,7 @@ const NavigationWithDropdown = ({
     switch (selection.label) {
       case "Logout":
         signOut(Firebase.auth).catch((error) => {
-          console.log("Failed to logout", error);
+          console.log(error);
         });
         localStorage.clear();
         router.push("/login");
@@ -168,7 +168,7 @@ const Header = () => {
       })}
     >
       <div className="px-5 md:px-20 lg:px-30 xl:px-40 2xl:px-96">
-        <div className="h-[100px]">
+        <div className="h-[70px]">
           <div className="flex items-center justify-between h-full">
             <div className="flex items-center">
               <Image

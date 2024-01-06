@@ -1,15 +1,16 @@
+"use client";
+
 import Box from "@components/Box";
 import ReactTimePicker from "@components/ReactTimePicker";
 import Search from "@components/Search";
 import TextField from "@components/TextField";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Create Strategy | Algo - To the future",
-  description: "Algo - To the future",
-};
 
 const CreateStrategy = () => {
+  const handleInstrumentSelect = (option: any) => {
+    // user selected instrument
+    console.log(option);
+  };
+
   return (
     <div className="relative px-5 md:px-20 lg:px-30 xl:px-40 2xl:px-96 pt-[120px]">
       <h2 className="text-center font-bold text-3xl pb-5">Create Strategy</h2>
@@ -33,10 +34,10 @@ const CreateStrategy = () => {
           />
         </div>
       </Box>
-      <Box title="Trading Setup" containerClass="">
+      <Box title="Trading Setup" containerClass="min-h-[500px]">
         <div className="flex space-x-3">
           <div className="mt-4 w-full md:w-1/2">
-            <Search />
+            <Search onSelect={handleInstrumentSelect} />
           </div>
           <div className="mt-4 w-full md:w-1/2">
             <TextField

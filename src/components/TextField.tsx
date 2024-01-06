@@ -1,8 +1,9 @@
 "use client";
 
+import Loader from "./Loader";
 import classNames from "classnames";
 import React, { ForwardedRef, forwardRef } from "react";
-import { HiMagnifyingGlass } from "react-icons/hi2";
+import { HiChevronDown, HiMagnifyingGlass } from "react-icons/hi2";
 
 type Prop = {
   rows?: number;
@@ -14,8 +15,11 @@ type Prop = {
   value?: string;
   error?: any;
   onChange?: (e: any) => void;
+  onBlur?: (e: any) => void;
+  onFocus?: () => void;
   disabled?: boolean;
-  searchIcon?: boolean;
+  isSearchable?: boolean;
+  loading?: boolean;
 };
 
 const getErrorStatus = (error?: any) => {
@@ -30,10 +34,9 @@ const TextField = forwardRef(
       id,
       type = "text",
       name,
-      onChange = (e) => {},
-      value,
       placeholder,
-      searchIcon = false,
+      isSearchable = false,
+      loading = false,
       error,
       ...props
     }: Prop,
@@ -47,9 +50,9 @@ const TextField = forwardRef(
             {title}
           </span>
         ) : null}
-        {searchIcon ? (
+        {isSearchable ? (
           <div className="relative flex items-center justify-start">
-            <div className="flex absolute p-4">
+            <div className="flex absolute p-3 left-0">
               <HiMagnifyingGlass />
             </div>
             <input
@@ -58,10 +61,8 @@ const TextField = forwardRef(
               id={id}
               name={name}
               placeholder={placeholder}
-              value={value}
-              onChange={onChange}
               className={classNames(
-                "flex w-full text-base p-4 pl-10 bg-textboxbg text-textboxtext border rounded-md shadow-sm placeholder-textboxtext focus:outline-none disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                "flex w-full text-base py-4 px-10 bg-textboxbg text-textboxtext border rounded-md shadow-sm placeholder-textboxtext focus:outline-none disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
                 {
                   "border-pink-500 focus:ring-1 !ring-pink-500 focus:ring-ping-700 !focus:border-pink-700":
                     errorStatus,
@@ -70,6 +71,14 @@ const TextField = forwardRef(
                 }
               )}
             />
+            {loading && (
+              <div className="flex absolute p-3 right-6">
+                <Loader className="h-4 w-4 p-0 m-0 -mt-1" />
+              </div>
+            )}
+            <div className="flex absolute p-3 right-0">
+              <HiChevronDown />
+            </div>
           </div>
         ) : type !== "textarea" ? (
           <input
@@ -78,8 +87,6 @@ const TextField = forwardRef(
             id={id}
             name={name}
             placeholder={placeholder}
-            value={value}
-            onChange={onChange}
             className={classNames(
               "flex w-full text-base p-4 bg-textboxbg text-textboxtext border rounded-md shadow-sm placeholder-textboxtext focus:outline-none disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
               {
@@ -97,8 +104,6 @@ const TextField = forwardRef(
             id={id}
             name={name}
             placeholder={placeholder}
-            value={value}
-            onChange={onChange}
             className={classNames(
               "flex w-full text-base p-4 bg-textboxbg text-textboxtext border rounded-md shadow-sm placeholder-textboxtext focus:outline-none disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
               {

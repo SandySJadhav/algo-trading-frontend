@@ -4,6 +4,8 @@ import PageLoader from "@components/PageLoader";
 import classNames from "classnames";
 import { Poppins } from "next/font/google";
 import { ReactNode } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({ weight: "500", subsets: ["devanagari"] });
 
@@ -40,6 +42,18 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         >
           Footer
         </footer> */}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable={false}
+          pauseOnHover={false}
+          theme="light"
+        />
       </body>
     </html>
   );

@@ -18,10 +18,9 @@ export const customerSlice = createSlice({
       }
     },
     setCustomer: (state, action) => {
-      console.log('User set in store ---> ', action.payload);
       state.loading = false;
       state.loaded = true;
-      state.details = action.payload;
+      state.details = JSON.parse(JSON.stringify(action.payload));
       if (action.payload.accessToken) {
         state.isAuth = true;
       }

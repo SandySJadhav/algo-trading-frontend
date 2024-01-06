@@ -1,8 +1,7 @@
 import classNames from "classnames";
 
 const Loader = ({
-  colorClass = "fill-master-blue",
-  bgColorClass = "text-white-600",
+  bgColorClass = "text-master-blue",
   className = "",
 }) => {
   const loaderClasses = classNames(
@@ -13,7 +12,6 @@ const Loader = ({
     "-mb-1",
     "animate-spin",
     bgColorClass,
-    colorClass,
     className
   );
 
