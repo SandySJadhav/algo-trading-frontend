@@ -66,6 +66,31 @@ const CreateStrategy = () => {
         <div className="custom_hr">
           <p>AND</p>
         </div>
+        <div className="flex space-x-3">
+          <div className="mt-4 w-full md:w-1/2">
+            <TextField
+              name="timeframe"
+              id="timeframe"
+              title="Timeframe"
+              value="1 HOUR"
+              disabled
+            />
+          </div>
+        </div>
+        <div className="custom_hr">
+          <p>AND</p>
+        </div>
+        <div className="flex space-x-3">
+          <div className="mt-4 w-full md:w-1/2">
+            <TextField
+              name="timeframe"
+              id="timeframe"
+              title="Timeframe"
+              value="1 HOUR"
+              disabled
+            />
+          </div>
+        </div>
       </Box>
     </div>
   );
