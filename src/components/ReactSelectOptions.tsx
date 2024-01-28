@@ -33,7 +33,7 @@ const ReactSelect = forwardRef(
         >
           {!options.length ? (
             <div className="block font-sm text-sm p-4 text-master-gray">
-              Start typing to search for instruments
+              Start typing...
             </div>
           ) : (
             options.map((option: any) => {
@@ -48,7 +48,7 @@ const ReactSelect = forwardRef(
                     <div className="flex text-sm">{option.label}</div>
                     <div className="flex justify-end">
                       <div className="text-center rounded-2xl p-2 text-xs bg-[#b3c5dc4d] text-master-blue">
-                        {option.value.exch_seg}
+                        {option.value?.exch_seg}
                       </div>
                     </div>
                   </div>

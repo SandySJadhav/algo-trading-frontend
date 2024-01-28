@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { setCustomer, setUserLoading } from "../redux/reducers/customer";
-import { DropdownOption } from "../types";
-import Dropdown from "./Dropdown";
-import Modal from "./Modal";
-import StoreWrapper from "./StoreWrapper";
+import { setCustomer, setUserLoading } from '../redux/reducers/customer';
+import { DropdownOption } from '../types';
+import Dropdown from './Dropdown';
+import Modal from './Modal';
+import StoreWrapper from './StoreWrapper';
 import {
   MobileNavigationMenus,
   MobileUserMenus,
   NavigationMenus,
-  UserMenus,
-} from "@constants/Menu";
-import Firebase from "@services/GoogleApp";
-import classNames from "classnames";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { HiBars3, HiChevronDown } from "react-icons/hi2";
-import { useDispatch, useSelector } from "react-redux";
+  UserMenus
+} from '@constants/Menu';
+import Firebase from '@services/GoogleApp';
+import classNames from 'classnames';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { HiBars3, HiChevronDown } from 'react-icons/hi2';
+import { useDispatch, useSelector } from 'react-redux';
 
 const NavigationWithDropdown = ({
   label,
   subMenus = [],
   url,
-  icon,
+  icon
 }: DropdownOption) => {
   const router = useRouter();
   const [panelOpen, setPanelOpen] = useState(false);
@@ -40,12 +40,12 @@ const NavigationWithDropdown = ({
       }
       setPanelOpen(!panelOpen);
     } else if (url) {
-      if (url.indexOf("http") === -1) {
+      if (url.indexOf('http') === -1) {
         // redirect to this link
         router.push(url);
       } else {
         // external site url
-        window.open(url, "_blank");
+        window.open(url, '_blank');
       }
     }
   };
@@ -58,12 +58,12 @@ const NavigationWithDropdown = ({
 
   const handleOnSelect = (selection: any) => {
     switch (selection.label) {
-      case "Logout":
+      case 'Logout':
         signOut(Firebase.auth).catch((error) => {
           console.log(error);
         });
         localStorage.clear();
-        router.push("/login");
+        router.push('/login');
         return;
 
       default:
@@ -81,13 +81,13 @@ const NavigationWithDropdown = ({
       tabIndex={0}
       className="select-none p-4 text-master-gray hover:text-master-blue active:text-master-blue focus:text-master-blue cursor-pointer"
       onClick={handleNavItemClick}
-      onKeyDown={(e) => e.key === "Enter" && handleNavItemClick()}
+      onKeyDown={(e) => e.key === 'Enter' && handleNavItemClick()}
     >
       <div className="flex items-center justify-start h-full">
         {icon}
         <span
-          className={classNames("min-w-10 text-center", {
-            "ml-2": icon,
+          className={classNames('min-w-10 text-center', {
+            'ml-2': icon
           })}
         >
           {label}
@@ -130,25 +130,24 @@ const Header = () => {
     if (window.scrollY > 9) {
       setFloatHeader(true);
     }
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll);
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [onScroll]);
 
   useEffect(() => {
-    console.log("Checking session...");
+    console.log('Checking session...');
     dispatch(setUserLoading(true));
     onAuthStateChanged(Firebase.auth, (user: any) => {
-      if (!user && pathname !== "/login" && pathname !== "/register") {
+      if (!user && pathname !== '/login' && pathname !== '/register') {
         // no user login found
-        router.push("/login");
-        dispatch(setUserLoading(false));
+        router.push('/login');
       } else if (user) {
         // user found, set redux state
         dispatch(setCustomer(user));
-        if (pathname === "/login" || pathname === "/register") {
-          router.push("/");
+        if (pathname === '/login' || pathname === '/register') {
+          router.push('/');
         }
       } else {
         // New user on login or register page
@@ -157,14 +156,14 @@ const Header = () => {
     });
   }, []);
 
-  if (!isAuth || pathname === "/login" || pathname === "/register") {
+  if (!isAuth || pathname === '/login' || pathname === '/register') {
     return null;
   }
 
   return (
     <header
-      className={classNames("header", {
-        "header-fixed": floatHeader,
+      className={classNames('header', {
+        'header-fixed': floatHeader
       })}
     >
       <div className="px-5 md:px-20 lg:px-30 xl:px-40 2xl:px-96">
@@ -176,7 +175,7 @@ const Header = () => {
                 alt="Logo"
                 width={100}
                 height={40}
-                src={"/logo.jpg"}
+                src={'/logo.jpg'}
                 priority
               />
             </div>

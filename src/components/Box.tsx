@@ -16,7 +16,7 @@ const Box = ({ title, children, containerClass }: Prop) => {
       )}
     >
       <h3 className="font-normal">{title}</h3>
-      <div>{children}</div>
+      <div className="flex flex-col">{children}</div>
     </div>
   );
 };

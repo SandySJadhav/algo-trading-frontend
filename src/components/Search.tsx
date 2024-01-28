@@ -1,7 +1,7 @@
 "use client";
 
 import { debounce } from "../utils";
-import ReactSelect from "./ReactSelect";
+import ReactSelectOptions from "./ReactSelectOptions";
 import TextField from "./TextField";
 import { searchScriptAction } from "@actions/search";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -95,7 +95,7 @@ const Search = ({ onSelect, selection }: Prop) => {
         placeholder="Eg. Nifty"
         value={searchTerm}
       />
-      <ReactSelect
+      <ReactSelectOptions
         ref={selectRef}
         open={!loading && open}
         options={results}
