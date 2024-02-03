@@ -10,6 +10,28 @@ declare global {
   }
 }
 
+export const extractUserData = (user: any) => {
+  const {
+    accessToken,
+    displayName,
+    email,
+    emailVerified,
+    isAnonymous,
+    photoURL,
+    uid,
+    stsTokenManager: { refreshToken }
+  } = user || {};
+  return {
+    accessToken,
+    displayName,
+    email,
+    emailVerified,
+    isAnonymous,
+    photoURL,
+    uid,
+    refreshToken
+  };
+};
 
 /**
  *
@@ -17,10 +39,7 @@ declare global {
  * @param {number} wait
  * @returns {function}
  */
-export const debounce = (
-  func: () => void,
-  wait: number
-) => {
+export const debounce = (func: () => void, wait: number) => {
   // creates a debounce and recognizes last action only
   return function (...args: any) {
     const context = globalThis;

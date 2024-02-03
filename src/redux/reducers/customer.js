@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setUserSession } from '@services/http.interceptor';
 
 const initialState = {
   loading: false,
@@ -20,9 +21,10 @@ export const customerSlice = createSlice({
     setCustomer: (state, action) => {
       state.loading = false;
       state.loaded = true;
-      state.details = JSON.parse(JSON.stringify(action.payload));
+      state.details = action.payload
       if (action.payload.accessToken) {
         state.isAuth = true;
+        setUserSession(action.payload.accessToken);
       }
     }
   }

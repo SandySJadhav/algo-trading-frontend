@@ -1,5 +1,5 @@
-import classNames from "classnames";
-import { ForwardedRef, forwardRef } from "react";
+import classNames from 'classnames';
+import { ForwardedRef, forwardRef } from 'react';
 
 type Prop = {
   open: boolean;
@@ -20,9 +20,9 @@ const ReactSelect = forwardRef(
     return (
       <div
         className={classNames(
-          "top-full bg-white border-2 shadow-master my-1 absolute w-full z-10 box-border",
+          'top-full bg-white border-2 shadow-master my-1 absolute w-full z-10 box-border overflow-y-auto overflow-x-hidden max-h-52',
           {
-            hidden: !open,
+            hidden: !open
           }
         )}
       >
@@ -62,6 +62,6 @@ const ReactSelect = forwardRef(
   }
 );
 
-ReactSelect.displayName = "ReactSelect";
+ReactSelect.displayName = 'ReactSelect';
 
 export default ReactSelect;

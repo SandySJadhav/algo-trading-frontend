@@ -2,6 +2,7 @@
 
 import { setCustomer, setUserLoading } from '../redux/reducers/customer';
 import { DropdownOption } from '../types';
+import { extractUserData } from '../utils';
 import Dropdown from './Dropdown';
 import Modal from './Modal';
 import StoreWrapper from './StoreWrapper';
@@ -145,7 +146,7 @@ const Header = () => {
         router.push('/login');
       } else if (user) {
         // user found, set redux state
-        dispatch(setCustomer(user));
+        dispatch(setCustomer(extractUserData(user)));
         if (pathname === '/login' || pathname === '/register') {
           router.push('/');
         }

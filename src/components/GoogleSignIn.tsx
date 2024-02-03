@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Button from "./Button";
-import Firebase from "@services/GoogleApp";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
+import Button from './Button';
+import Firebase from '@services/GoogleApp';
+import { signInWithPopup } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
 
 type Prop = {
   variant?: string;
@@ -14,25 +14,17 @@ type Prop = {
 
 const GoogleSignIn = ({ variant, label }: Prop) => {
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleOnClick = () => {
-    setError("");
+    setError('');
     signInWithPopup(Firebase.auth, Firebase.provider)
       .then(() => {
         // The signed-in user info.
-        router.push("/");
+        router.push('/');
       })
       .catch((error) => {
         console.log(error);
-        // Handle Errors here.
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorMessage);
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
       });
   };
 
