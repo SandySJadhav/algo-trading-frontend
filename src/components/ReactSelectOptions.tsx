@@ -20,14 +20,14 @@ const ReactSelect = forwardRef(
     return (
       <div
         className={classNames(
-          'top-full bg-white border-2 shadow-master my-1 absolute w-full z-10 box-border overflow-y-auto overflow-x-hidden max-h-52',
+          'top-full bg-white border-2 shadow-master my-1 absolute w-full z-10 box-border min-w-72',
           {
             hidden: !open
           }
         )}
       >
         <div
-          className="max-h-[300px] overflow-y-auto overflow-x-hidden pb-1 relative box-border"
+          className="overflow-y-auto overflow-x-hidden max-h-52 pb-1 relative box-border"
           onBlur={handleOnBlur}
           ref={ref}
         >
