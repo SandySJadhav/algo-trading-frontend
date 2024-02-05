@@ -41,7 +41,8 @@ export const getRequest = async (url: string) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + APIMSession.token
+      Authorization: 'Bearer ' + APIMSession.token,
+      'Access-Control-Allow-Origin': window.location.origin
     }
   });
   const data = await response.json();
