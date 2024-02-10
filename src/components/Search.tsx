@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { debounce } from "../utils";
-import ReactSelectOptions from "./ReactSelectOptions";
-import TextField from "./TextField";
-import { searchInstrumentAction } from "@actions/search";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { debounce } from '../utils';
+import ReactSelectOptions from './ReactSelectOptions';
+import TextField from './TextField';
+import { searchInstrumentAction } from '@actions/search';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type Prop = {
   onSelect: (selection: any) => void;
@@ -16,26 +16,34 @@ const Search = ({ onSelect, selection }: Prop) => {
   const selectRef = useRef();
 
   const [results, setResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [skipSearch, setSkipSearch] = useState(false);
 
   const getResults = useCallback(
     debounce(async () => {
-      const searchResults = await searchInstrumentAction({ searchTerm });
-      if (searchResults?.statusCode === 200) {
-        const filteredResults: any = [];
-        searchResults.data.forEach((result: any) => {
-          const { displayName, symbol } = result;
-          filteredResults.push({
-            label: displayName || symbol,
-            value: result,
+      if (!skipSearch) {
+        const searchResults = await searchInstrumentAction({ searchTerm });
+        if (searchResults?.statusCode === 200) {
+          const filteredResults: any = [];
+          searchResults.data.forEach((result: any) => {
+            const { displayName, symbol } = result;
+            filteredResults.push({
+              label: displayName || symbol,
+              value: result
+            });
           });
-        });
-        setResults(filteredResults);
-        setLoading(false);
+          setResults(filteredResults);
+          setLoading(false);
+        } else {
+          console.log('Failed to get search results');
+        }
       } else {
-        console.log("Failed to get search results");
+        // skip search action as user selected dropdown option
+        setSkipSearch(false);
+        setLoading(false);
+        setResults([]);
       }
     }, 700),
     [searchTerm]
@@ -62,13 +70,14 @@ const Search = ({ onSelect, selection }: Prop) => {
     // check if user clicked outside of options displayed
     if (
       !e.relatedTarget ||
-      e.relatedTarget.classList.contains("react-select-option") === -1
+      e.relatedTarget.classList.contains('react-select-option') === -1
     ) {
       setOpen(false);
     }
   };
 
   const handleOnSelect = (option: any) => {
+    setSkipSearch(true);
     setOpen(false);
     setSearchTerm(option.displayName || option.symbol);
     setResults([]);
@@ -96,6 +105,7 @@ const Search = ({ onSelect, selection }: Prop) => {
         value={searchTerm}
       />
       <ReactSelectOptions
+        searchTerm={searchTerm}
         ref={selectRef}
         open={!loading && open}
         options={results}

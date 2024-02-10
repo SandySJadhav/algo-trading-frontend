@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { ForwardedRef, forwardRef } from 'react';
 
 type Prop = {
+  searchTerm?: string;
   open: boolean;
   loading?: boolean;
   options: any;
@@ -10,7 +11,10 @@ type Prop = {
 };
 
 const ReactSelect = forwardRef(
-  ({ options = [], onClose, open, onSelect }: Prop, ref: ForwardedRef<any>) => {
+  (
+    { options = [], onClose, open, onSelect, searchTerm }: Prop,
+    ref: ForwardedRef<any>
+  ) => {
     const handleOnBlur = (e: any) => {
       if (!e.currentTarget.contains(e.relatedTarget)) {
         onClose();
@@ -32,9 +36,15 @@ const ReactSelect = forwardRef(
           ref={ref}
         >
           {!options.length ? (
-            <div className="block font-sm text-sm p-4 text-master-gray">
-              Start typing...
-            </div>
+            searchTerm?.length && searchTerm.length > 1 ? (
+              <div className="block font-sm text-sm p-4 text-master-red">
+                Please enter correct instrument name...
+              </div>
+            ) : (
+              <div className="block font-sm text-sm p-4 text-master-gray">
+                Please enter instrument name...
+              </div>
+            )
           ) : (
             options.map((option: any) => {
               return (
