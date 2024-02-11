@@ -1,7 +1,7 @@
 'use client';
 
 import { setCustomer, setUserLoading } from '../redux/reducers/customer';
-import { DropdownOption } from '../types';
+import { DropdownOption } from '../types/dropdown';
 import { extractUserData } from '../utils';
 import Dropdown from './Dropdown';
 import Modal from './Modal';

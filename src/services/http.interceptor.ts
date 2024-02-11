@@ -1,8 +1,5 @@
 import { toast } from 'react-toastify';
 
-// NEW HTTP ENDPOINTS
-const APIM_ENV = process.env.APIM_ENV;
-
 const APIMSession = {
   token: {},
   get getToken() {
@@ -20,7 +17,7 @@ export const setUserSession = (token: string) => {
 };
 
 export const postRequest = async (url: string, body: any) => {
-  const response = await fetch(APIM_ENV + url, {
+  const response = await fetch('/api' + url, {
     method: 'POST',
     body: body ? JSON.stringify(body) : null,
     headers: {
@@ -37,7 +34,7 @@ export const postRequest = async (url: string, body: any) => {
 };
 
 export const getRequest = async (url: string) => {
-  const response = await fetch(APIM_ENV + url, {
+  const response = await fetch('/api' + url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

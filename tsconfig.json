@@ -23,7 +23,8 @@
       "@constants/*": ["./src/constants/*"],
       "@actions/*": ["./src/redux/actions/*"],
       "@services/*": ["./src/services/*"],
-      "@images/*": ["./src/assets/images/*"]
+      "@images/*": ["./src/assets/images/*"],
+      "@types/*": ["./src/types/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

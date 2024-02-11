@@ -1,4 +1,4 @@
-import { DropdownOption } from "../types";
+import { DropdownOption } from "../types/dropdown";
 import { LI_ANIMATION } from "@constants/Animations";
 import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
