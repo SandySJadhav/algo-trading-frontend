@@ -82,10 +82,7 @@ const searchInstruments = async (searchTerm: string) => {
   if (response.empty) {
     return {
       status: 200,
-      body: {
-        statusCode: 200,
-        data: []
-      }
+      data: []
     };
   }
 
@@ -131,10 +128,7 @@ const searchInstruments = async (searchTerm: string) => {
 
   return {
     status: 200,
-    body: {
-      statusCode: 200,
-      data
-    }
+    data
   };
 };
 

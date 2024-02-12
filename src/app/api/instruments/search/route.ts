@@ -1,7 +1,8 @@
 import searchInstruments from '@services/firebase/search';
 import verifyToken from '@services/firebase/verifyToken';
 import { headers } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -13,8 +14,8 @@ export async function POST(req: NextRequest) {
   if (status !== 200) {
     return NextResponse.json({ statusCode: status, message }, { status });
   } else if (searchTerm) {
-    const result = await searchInstruments(searchTerm);
-    return NextResponse.json(result.body, { status: result.status });
+    const { data } = await searchInstruments(searchTerm);
+    return NextResponse.json({ statusCode: status, message, data }, { status });
   } else {
     return NextResponse.json(
       { statusCode: 400, message: 'Bad Request!' },

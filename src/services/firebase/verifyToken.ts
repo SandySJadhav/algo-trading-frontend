@@ -2,20 +2,11 @@ import Firestore from './firestore';
 
 const verifyToken = async (authorization?: string | null) => {
   try {
-    if (authorization) {
-      const idToken = (authorization + '').split(' ')?.[1];
-      if (idToken) {
-        await Firestore.auth.verifyIdToken(idToken);
-        return {
-          status: 200,
-          message: 'Success!'
-        };
-      }
-    }
-    // Forbidden
+    const idToken = (authorization + '').split(' ')?.[1];
+    await Firestore.auth.verifyIdToken(idToken);
     return {
-      status: 403,
-      message: 'Unauthorized!'
+      status: 200,
+      message: 'Success!'
     };
   } catch (error: any) {
     if (error.code === 'auth/id-token-expired') {
@@ -27,8 +18,8 @@ const verifyToken = async (authorization?: string | null) => {
     } else {
       // Forbidden
       return {
-        status: 403,
-        message: 'Unauthorized!'
+        status: 400,
+        message: 'Bad Request!'
       };
     }
   }
