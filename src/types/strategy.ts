@@ -20,7 +20,7 @@ export interface instrument_prop {
 }
 
 export interface strategy_prop {
-  id: string;
+  strategy_id: string;
   buffer_points: number;
   candle_timeframe: 'ONE_HOUR';
   start_entry_after: number;

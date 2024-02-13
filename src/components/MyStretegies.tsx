@@ -1,24 +1,39 @@
 'use client';
 
 import Box from './Box';
-import { getMyStrategies } from '@actions/strategies';
+import { getMyStrategiesAction } from '@actions/strategies';
+import { strategy_prop } from '@mytypes/strategy';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const MyStrategies = () => {
-  const [activeStrategiesLoading, setActiveStrategiesLoading] = useState(false);
+  const [myStrategiesLoading, setMyStrategiesLoading] = useState(false);
+  const [myStragegies, setMyStrategies] = useState([]);
   const { isAuth } = useSelector((state: any) => state.customer);
+
+  const getMyStrategies = async () => {
+    const allStrategies = await getMyStrategiesAction();
+    console.log('🚀 All strategies', allStrategies);
+    setMyStrategies(allStrategies);
+    setMyStrategiesLoading(false);
+  };
 
   useEffect(() => {
     if (isAuth) {
-      setActiveStrategiesLoading(true);
+      setMyStrategiesLoading(true);
       getMyStrategies();
     }
   }, [isAuth]);
 
   return (
-    <Box containerClass="min-h-[auto]" loading={activeStrategiesLoading}>
-      <div></div>
+    <Box containerClass="min-h-[auto]" loading={myStrategiesLoading}>
+      <div>
+        <ul>
+          {myStragegies.map((strategy: strategy_prop) => {
+            return <li key={strategy.strategy_id}>{strategy.strategy_id}</li>;
+          })}
+        </ul>
+      </div>
     </Box>
   );
 };
