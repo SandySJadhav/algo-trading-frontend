@@ -29,7 +29,7 @@ export interface strategy_prop {
   entries_taken_today: number;
   previous_candle: 'CROSSES';
   status: string;
-  instrument_to_watch: instrument_prop;
+  instrument_to_watch: any;
   trailing_sl_points: number;
   market_status?: 'OPEN' | 'CLOSED';
   order_status:
@@ -40,18 +40,5 @@ export interface strategy_prop {
     | 'COMPLETED'
     | 'FAILED'
     | 'RESET';
-  call_instrument_to_trade?: instrument_prop;
-  put_instrument_to_trade?: instrument_prop;
   lots: number;
-  data: any;
-  entry_price: number;
-  exit_price: number;
-  profit_points: number;
-  previous_candle_low: number;
-  previous_candle_high: number;
-  trailed_sl: number;
-  trade_type: 'CE' | 'PE';
-  target: number;
-  target_difference_points: number;
-  achieved_target: number;
 }

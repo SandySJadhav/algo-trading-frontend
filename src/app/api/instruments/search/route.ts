@@ -4,16 +4,17 @@ import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { searchTerm } = body;
+export async function GET(request: NextRequest) {
   const headersList = headers();
   const authorization = headersList.get('authorization');
   const { status, message } = await verifyToken(authorization);
-
   if (status !== 200) {
     return NextResponse.json({ statusCode: status, message }, { status });
-  } else if (searchTerm) {
+  }
+
+  const searchParams = request.nextUrl.searchParams;
+  const searchTerm = searchParams.get('searchTerm');
+  if (searchTerm) {
     const { data } = await searchInstruments(searchTerm);
     return NextResponse.json({ statusCode: status, message, data }, { status });
   } else {

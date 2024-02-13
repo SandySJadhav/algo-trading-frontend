@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
 const APIMSession = {
-  token: {},
+  token: '',
   get getToken() {
     return this.token;
   },
@@ -16,14 +16,13 @@ export const setUserSession = (token: string) => {
   APIMSession.setToken = token;
 };
 
-export const postRequest = async (url: string, body: any) => {
+export const postRequest = async (url: string, body?: any) => {
   const response = await fetch('/api' + url, {
     method: 'POST',
     body: body ? JSON.stringify(body) : null,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + APIMSession.token,
-      'Access-Control-Allow-Origin': window.location.origin
+      Authorization: 'Bearer ' + APIMSession.token
     }
   });
   const data = await response.json();
@@ -38,8 +37,7 @@ export const getRequest = async (url: string) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + APIMSession.token,
-      'Access-Control-Allow-Origin': window.location.origin
+      Authorization: 'Bearer ' + APIMSession.token
     }
   });
   const data = await response.json();

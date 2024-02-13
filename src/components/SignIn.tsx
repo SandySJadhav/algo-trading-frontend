@@ -5,7 +5,7 @@ import { validateEmail } from '../utils';
 import Button from './Button';
 import GoogleSignIn from './GoogleSignIn';
 import TextField from './TextField';
-import Firebase from '@services/GoogleApp';
+import { FirebaseAuth } from '@services/GoogleApp';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -45,7 +45,7 @@ const SignIn = () => {
   const handleLogin = (data: any) => {
     setInvalidCredentials(false);
     const { email, password } = data;
-    signInWithEmailAndPassword(Firebase.auth, email, password)
+    signInWithEmailAndPassword(FirebaseAuth, email, password)
       .then(() => {
         router.push('/');
       })

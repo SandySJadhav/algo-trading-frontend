@@ -3,7 +3,7 @@
 import { debounce } from '../utils';
 import ReactSelectOptions from './ReactSelectOptions';
 import TextField from './TextField';
-import { searchInstrumentAction } from '@actions/search';
+import { searchInstrumentAction } from '@actions/instruments';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type Prop = {
@@ -24,7 +24,7 @@ const Search = ({ onSelect, selection }: Prop) => {
   const getResults = useCallback(
     debounce(async () => {
       if (!skipSearch) {
-        const searchResults = await searchInstrumentAction({ searchTerm });
+        const searchResults = await searchInstrumentAction(searchTerm);
         if (searchResults?.statusCode === 200) {
           const filteredResults: any = [];
           searchResults.data.forEach((result: any) => {

@@ -5,7 +5,7 @@ import { validateEmail, validatePass } from '../utils';
 import Button from './Button';
 import GoogleSignIn from './GoogleSignIn';
 import TextField from './TextField';
-import Firebase from '@services/GoogleApp';
+import { FirebaseAuth } from '@services/GoogleApp';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -47,7 +47,7 @@ const SignUp = () => {
   const handleRegister = (data: any) => {
     setEmailAlreadyInUse(false);
     const { email, password } = data;
-    createUserWithEmailAndPassword(Firebase.auth, email, password)
+    createUserWithEmailAndPassword(FirebaseAuth, email, password)
       .then(() => {
         router.push('/');
       })

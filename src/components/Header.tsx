@@ -12,7 +12,7 @@ import {
   NavigationMenus,
   UserMenus
 } from '@constants/Menu';
-import Firebase from '@services/GoogleApp';
+import { FirebaseAuth } from '@services/GoogleApp';
 import classNames from 'classnames';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import Image from 'next/image';
@@ -60,7 +60,7 @@ const NavigationWithDropdown = ({
   const handleOnSelect = (selection: any) => {
     switch (selection.label) {
       case 'Logout':
-        signOut(Firebase.auth).catch((error) => {
+        signOut(FirebaseAuth).catch((error) => {
           console.log(error);
         });
         localStorage.clear();
@@ -140,7 +140,7 @@ const Header = () => {
   useEffect(() => {
     console.log('Checking session...');
     dispatch(setUserLoading(true));
-    onAuthStateChanged(Firebase.auth, (user: any) => {
+    onAuthStateChanged(FirebaseAuth, (user: any) => {
       if (!user && pathname !== '/login' && pathname !== '/register') {
         // no user login found
         router.push('/login');

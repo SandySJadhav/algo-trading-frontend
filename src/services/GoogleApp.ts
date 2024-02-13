@@ -2,6 +2,8 @@
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth } from 'firebase/auth';
 
+console.log('🚀 Initializing firebase app client');
+
 // Initialize Firebase
 const app = initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -11,10 +13,7 @@ const app = initializeApp({
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID
 });
+
 // Initialize auth & provider
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
-const Firebase = { auth, provider };
-
-export default Firebase;
+export const FirebaseAuth = getAuth(app);
+export const FirebaseAuthProvider = new GoogleAuthProvider();

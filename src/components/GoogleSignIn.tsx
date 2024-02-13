@@ -1,7 +1,7 @@
 'use client';
 
 import Button from './Button';
-import Firebase from '@services/GoogleApp';
+import { FirebaseAuth, FirebaseAuthProvider } from '@services/GoogleApp';
 import { signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ const GoogleSignIn = ({ variant, label }: Prop) => {
 
   const handleOnClick = () => {
     setError('');
-    signInWithPopup(Firebase.auth, Firebase.provider)
+    signInWithPopup(FirebaseAuth, FirebaseAuthProvider)
       .then(() => {
         // The signed-in user info.
         router.push('/');

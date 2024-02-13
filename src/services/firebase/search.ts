@@ -1,26 +1,6 @@
 import { MONTHS, getMomentPayload, getISTTime } from '../moment';
-import Firestore from './firestore';
-
-interface instrument_prop {
-  id?: string;
-  token: any;
-  symbol: string;
-  name: string;
-  expiry: string;
-  lotsize: any;
-  instrumenttype:
-    | 'OPTFUT'
-    | 'FUTCOM'
-    | 'OPTSTK'
-    | 'OPTIDX'
-    | 'FUTSTK'
-    | 'FUTIDX';
-  exch_seg: string;
-  tick_size: any;
-  rel_keywords?: string[];
-  matches?: any;
-  displayName?: string;
-}
+import { FirebaseDB } from './firestore';
+import { instrument_prop } from '@mytypes/strategy';
 
 const getFilteredResults = (results: instrument_prop[], query: string[]) => {
   let maxMatched = 0;
@@ -55,7 +35,7 @@ const getFilteredResults = (results: instrument_prop[], query: string[]) => {
 const searchInstruments = async (searchTerm: string) => {
   const keywords = searchTerm.toUpperCase().trim();
   const allKeywords = keywords.split(' ');
-  const instruments_collection = Firestore.db.collection('instruments');
+  const instruments_collection = FirebaseDB.collection('instruments');
   let response;
 
   if (allKeywords.length > 1) {

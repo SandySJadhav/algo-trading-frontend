@@ -1,15 +1,20 @@
 'use client';
 
 import Box from './Box';
+import { getMyStrategies } from '@actions/strategies';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const MyStrategies = () => {
   const [activeStrategiesLoading, setActiveStrategiesLoading] = useState(false);
-  const [activeStrategies, setActiveStrategies] = useState({});
+  const { isAuth } = useSelector((state: any) => state.customer);
 
   useEffect(() => {
-    setActiveStrategiesLoading(true);
-  }, []);
+    if (isAuth) {
+      setActiveStrategiesLoading(true);
+      getMyStrategies();
+    }
+  }, [isAuth]);
 
   return (
     <Box containerClass="min-h-[auto]" loading={activeStrategiesLoading}>
