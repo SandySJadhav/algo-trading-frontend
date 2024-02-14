@@ -28,9 +28,9 @@ const Search = ({ onSelect, selection }: Prop) => {
         if (searchResults?.statusCode === 200) {
           const filteredResults: any = [];
           searchResults.data.forEach((result: any) => {
-            const { displayName, symbol } = result;
+            const { display_name, symbol } = result;
             filteredResults.push({
-              label: displayName || symbol,
+              label: display_name || symbol,
               value: result
             });
           });
@@ -51,8 +51,8 @@ const Search = ({ onSelect, selection }: Prop) => {
 
   useEffect(() => {
     if (
-      (selection?.displayName || selection?.symbol) &&
-      searchTerm !== (selection?.displayName || selection?.symbol)
+      (selection?.display_name || selection?.symbol) &&
+      searchTerm !== (selection?.display_name || selection?.symbol)
     ) {
       onSelect(null);
     }
@@ -79,7 +79,7 @@ const Search = ({ onSelect, selection }: Prop) => {
   const handleOnSelect = (option: any) => {
     setSkipSearch(true);
     setOpen(false);
-    setSearchTerm(option.displayName || option.symbol);
+    setSearchTerm(option.display_name || option.symbol);
     setResults([]);
     onSelect(option);
   };

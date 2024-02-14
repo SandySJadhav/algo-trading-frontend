@@ -39,7 +39,10 @@ export const extractUserData = (user: any) => {
  * @param {number} wait
  * @returns {function}
  */
-export const debounce = (func: () => void, wait: number) => {
+export const debounce = (
+  func: (...val: any[]) => Promise<void>,
+  wait: number
+) => {
   // creates a debounce and recognizes last action only
   return function (...args: any) {
     const context = globalThis;

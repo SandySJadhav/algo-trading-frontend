@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { getISTTime } from '@services/moment';
 import { initializeApp, cert, App } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
@@ -10,7 +11,7 @@ const app: App = initializeApp(
   {
     credential: cert('algo-to-the-future-key.json')
   },
-  'algo-admin'
+  'algo-admin-' + getISTTime().milliseconds()
 );
 // Initialize database & auth
 export const FirebaseAdminAuth = getAuth(app);

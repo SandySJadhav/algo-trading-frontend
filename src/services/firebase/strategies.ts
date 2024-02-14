@@ -28,7 +28,9 @@ export const getMyStrategies = async (userId: string) => {
     }
     userStrategies.forEach((strategy: any) => {
       const str: strategy_prop = strategy.data();
-      str.instrument_to_watch = str.instrument_to_watch.id;
+      if (str.instrument_to_watch) {
+        str.instrument_to_watch = str.instrument_to_watch.id;
+      }
       data.push(str);
     });
   }
@@ -37,4 +39,14 @@ export const getMyStrategies = async (userId: string) => {
     data,
     status: 200
   };
+};
+
+export const updateMyStrategy = async (
+  userId: string,
+  documentId: string,
+  body: any
+) => {
+  const userStrategy = await FirebaseDB.collection('strategies')
+    .doc(documentId)
+    .update(body);
 };

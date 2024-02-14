@@ -69,39 +69,7 @@ const searchInstruments = async (searchTerm: string) => {
   const results: instrument_prop[] = [];
   response.forEach((res: any) => {
     const resData = res.data();
-    const { symbol, exch_seg, name, instrumenttype, expiry } = resData;
-    if (exch_seg !== 'NSE') {
-      const payload = getMomentPayload(expiry);
-      const expiryDate = getISTTime().set(payload);
-      let newSymbol = name;
-      const month = MONTHS[expiryDate.month()]; // month = JAN
-      const expDate = expiry.split(month)[0]; // expDate = 31
-
-      newSymbol += ' ' + expDate + ' ' + month + ' ' + expiryDate.year();
-
-      if (['FUTCOM', 'FUTSTK', 'FUTIDX'].includes(instrumenttype)) {
-        newSymbol += ' FUT';
-      } else if (['OPTFUT', 'OPTSTK', 'OPTIDX'].includes(instrumenttype)) {
-        let wrdStr = symbol.substring(name.length);
-        const optionType = wrdStr.endsWith('CE') ? 'CE' : 'PE';
-        wrdStr = wrdStr.substring(0, wrdStr.length - 2);
-        if (instrumenttype === 'OPTFUT') {
-          // MCX option
-          wrdStr = wrdStr.substring(5); // output = 7000
-        } else {
-          // NFO option
-          wrdStr = wrdStr.substring(7); // output = 7000
-        }
-        newSymbol += ' ' + wrdStr + ' ' + optionType;
-      }
-
-      results.push({
-        ...resData,
-        displayName: newSymbol
-      });
-    } else {
-      results.push(resData);
-    }
+    results.push(resData);
   });
 
   const data = getFilteredResults(results, allKeywords);
